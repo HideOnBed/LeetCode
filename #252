@@ -1,0 +1,48 @@
+find the smallest start in the array, and set the corresponding end as the flag, remove this element then find the smallest start in the rest
+array, and it should equal to or bigger than the flag, or return false;
+
+class Solution {
+    public boolean canAttendMeetings(Interval[] intervals) {
+        if(intervals.length == 1 || intervals.length == 0) return true;
+        List<Interval> l = new LinkedList<Interval>();
+        int min = intervals[0].start;
+        int index = 0;
+        for(int i = 0; i < intervals.length; i++){
+            l.add(intervals[i]);
+            if(intervals[i].start < min) {min = intervals[i].start; index = i;}
+        }
+        int max = intervals[index].end;
+        l.remove(index);
+        while(l.size() > 0){
+            int[] a = find(l);
+            if(a[0] < max) return false;
+            max = a[1];
+            l.remove(a[2]);
+        }
+        return true;
+    }
+    public int[] find(List<Interval> l){
+        int[] a = new int[3];
+        a[0] = l.get(0).start;
+        a[1] = l.get(0).end;
+        a[2] = 0;
+        int i = 0;
+        for(Interval s : l){
+            if(s.start < a[0]) {a[0] = s.start;a[1] = s.end; a[2] = i;}
+            i++;
+        }
+        return a;
+    }
+}
+
+
+better way: the mind is similiar,but my way is too complicate.
+            The first one is use the method Arrays.sort(intervals, Comparator<Interval>(){
+                                              public int compare(Interval a, Interval b){
+                                                return a.start-b.start;
+                                              }
+                                            })
+            to sort the array;
+            
+            The second is to create two arrays to save the value of start and end of each Interval. Then sort the two arrays.
+            If the result is true, start[i] should bigger than end[i-1];
