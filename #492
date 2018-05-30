@@ -2,5 +2,20 @@ One Integer can be got by multiplying two integers, and one of them must less th
 and the other must greater than that or both of them equal to that. So to find the biggest smaller multiplier(cause the range is smaller) is 
 one way to solve the problem.
 
-Step 1: get the square root of area by using Math.sqrt(area);
-Step 2；i start from sqrt to 0. if(area%i==0) them we get the smaller multiplier
+class Solution {
+    public int[] constructRectangle(int area) {
+        int[] r = new int[2];
+        int mid = (int)Math.sqrt(area);
+        for(int i = mid; i > 0; i--){
+            if(area%i == 0){
+                r[0] = area/i;
+                r[1] = i;
+                return r;
+            }
+        }
+        return r;
+    }
+}
+
+error in first time: didn't cast the result of Math.sqrt to int
+tip: this mind can also use to find the prime number
