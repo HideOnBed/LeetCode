@@ -1,0 +1,29 @@
+use each element in nums2 to compare to nums1 to see whether nums1 contains the element,
+create one list to save the intersection, and another to save the element which has been compared
+
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        if(nums1.length == 0 || nums2.length == 0) return new int[0];
+        List<Integer> result = new LinkedList<Integer>();
+        List<Integer> checked = new LinkedList<Integer>();
+        for(int i = 0; i < nums2.length; i++){
+            if(checked.contains(nums2[i]) || result.contains(nums2[i])) continue;
+            int flag = 0;
+            for(int j = 0; j < nums1.length; j++){
+                if(nums1[j] == nums2[i]){
+                    result.add(nums2[i]);
+                    flag = 1;
+                    break;
+                }
+            }
+            if(flag == 0) checked.add(nums2[i]);
+        }
+        int[] r= new int[result.size()];
+        for(int i = 0; i < r.length; i++){
+            r[i] = result.remove(0);
+        }
+        return r;
+    }
+}
+
+better way: using Set instead of list to manage the repeated elements;
