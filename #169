@@ -1,0 +1,21 @@
+//sort the array by using Array.sort(), them count the amount each element, if exceed n/2,return
+
+class Solution {
+    public int majorityElement(int[] nums) {
+        int len = nums.length;
+        if(len == 1) return nums[0];
+        Arrays.sort(nums);
+        for(int i = 0; i < len; i++){
+            int r = 1;
+            while(i < nums.length-1 && nums[i+1] == nums[i]){
+                r++;
+                i++;
+            }
+            if(r > len/2) return nums[i];
+        }
+        return 0;
+    }
+}
+
+//better way, the element which occurs more than n/2 times must appear at the middle of the array after sorting, 
+so just return nums[n/2] after sorting
