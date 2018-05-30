@@ -1,0 +1,17 @@
+we just need to find out the intersection area of all the operations, so the value in this area would be the greatest.
+
+class Solution {
+    public int maxCount(int m, int n, int[][] ops) {
+        if(ops.length == 0) return m*n;
+        int max_i = ops[0][0];
+        int max_j = ops[0][1];
+        for(int i = 1; i < ops.length; i++){
+            if(ops[i][0] < max_i) max_i = ops[i][0];
+            if(ops[i][1] < max_j) max_j = ops[i][1]; 
+            if(max_i == 1 && max_j == 1) break;
+        }
+        return max_i*max_j;
+    }
+}
+
+error in first time: overlooking the situation of empty array
