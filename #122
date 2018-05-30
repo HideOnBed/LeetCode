@@ -1,0 +1,5 @@
+Step 1: while(prices[i+1] <= prices[i]) i++;   buy = prices[i];
+Step 2: while(prices[i+1] >= prices[i]) i++;   sell = prices[i];
+Step 3: profits += sell-buy;
+
+Error in first time: add an unnecessary step: i++; 
