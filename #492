@@ -1,0 +1,6 @@
+One Integer can be got by multiplying two integers, and one of them must less than the square root of the integer 
+and the other must greater than that or both of them equal to that. So to find the biggest smaller multiplier(cause the range is smaller) is 
+one way to solve the problem.
+
+Step 1: get the square root of area by using Math.sqrt(area);
+Step 2；i start from sqrt to 0. if(area%i==0) them we get the smaller multiplier
