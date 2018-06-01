@@ -1,0 +1,25 @@
+Took too much time to understand the question. Then find it is similiar to the casual match game, change all the elements which
+are linked together.
+
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        int flag = image[sr][sc];
+        if(flag == newColor) return image;
+        floodFill(image, sr, sc, newColor, flag);
+        return image;
+    }
+    
+    public void floodFill(int[][] image, int sr, int sc, int newColor, int flag){
+        if(sr < 0 || sc < 0 || sr >= image.length || sc >= image[0].length) return;
+        if(image[sr][sc] == flag){
+            image[sr][sc] = newColor;
+            floodFill(image, sr+1, sc, newColor, flag);
+            floodFill(image, sr-1, sc, newColor, flag);
+            floodFill(image, sr, sc-1, newColor, flag);
+            floodFill(image, sr, sc+1, newColor, flag);
+        }
+    }
+}
+
+Error in first time:
+Forgot to consider the situation where image[sr][sc] == newColor. It would lead the iterated function keep iterating.
