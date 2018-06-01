@@ -20,3 +20,6 @@ class Solution {
 }
 
 Error in first time: add an unnecessary step: i++ after the first while loop; 
+
+Better way found in second time:
+Just let prices[i]-prices[i-1](i from 1 to prices.length), and add the result to profit if it is bigger than 0; 
