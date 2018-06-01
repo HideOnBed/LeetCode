@@ -1,0 +1,37 @@
+anagram(相同字母异序词)
+
+First idea :
+Add all the character in s, and add all the character in t, if the two results are equal, return true; 
+This idea is false, because the sum of "ac" equals to "bb", but they are not anagram.
+
+Second idea:
+Use a Set to save the characters of s, and an int array to save the times each character occurs in s. Then traverse the characters
+in t, if(!set.contains(character)) return fasle, else array[char-97]--, and finally if all the value in array is 0, return true;
+
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if(s.length() != t.length()) return false;
+        char[] a = s.toCharArray();
+        char[] b = t.toCharArray();
+        int len = a.length;
+        Set<Character> st = new HashSet<Character>(); 
+        int[] times = new int[26];
+        for(int i = 0; i < len; i++){
+            st.add(a[i]);
+            times[a[i]-97]++;
+        }
+        for(int i = 0; i < len; i++){
+            if(!st.contains(b[i])) return false;
+            times[b[i]-97]--;
+        }
+        for(int i = 0; i < 26; i++){
+            if(times[i] != 0) return false;
+        }
+        return true;
+    }
+}
+
+Better way:
+Actually, there is no need to use Set to judge whether String t has extra character, it will increase the time consumption. We just use an
+integer array to record the times each character occurs in String s(array[character-97]++), and then traverse String t, subtract crrospending
+value in array(array[character-97]--), finally if all the element in array is 0 return true;
